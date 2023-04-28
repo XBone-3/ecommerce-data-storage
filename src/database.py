@@ -67,7 +67,6 @@ def create_table(connection, table_creation_statement):
         if connection.is_connected():
             cursor = connection.cursor()
             cursor.execute(table_creation_statement)
-            # cursor.commit()
             connection.commit()
             cursor.close()
             # connection.close()

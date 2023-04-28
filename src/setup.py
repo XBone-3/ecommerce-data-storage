@@ -2,7 +2,7 @@ import csv
 import database as db
 
 PW = "fool"  # IMPORTANT! Put your MySQL Terminal password here.
-ROOT = "call_me_x"
+ROOT = "call_me_x"  # IMPORTANT! Put your MySQL Terminal username here.
 DB = "ecommerce_record"  # This is the name of the database we will create in the next step - call it whatever you like.
 LOCALHOST = "localhost"  # considering you have installed MySQL server on your computer
 
@@ -21,6 +21,7 @@ db.create_and_switch_database(connection, DB, DB)
 # if you have created the table in UI, then no need to define the table structure
 # If you are using python to create the tables, call the relevant query to complete the creation
 
+# Query to create users table
 CREATE_USERS_TABLE = F'''
 CREATE TABLE IF NOT EXISTS `{DB}`.`users` (
   `user_id` VARCHAR(15) NOT NULL,
@@ -32,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `{DB}`.`users` (
   PRIMARY KEY (`user_id`));
 '''
 
+# Query to create orders table
 CREATE_ORDERS_TABLE = f'''
 CREATE TABLE IF NOT EXISTS `{DB}`.`orders` (
   `order_id` INT NOT NULL,
@@ -50,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `{DB}`.`orders` (
 );
 '''
 
+# Query to create products table
 CREATE_PRODUCTS_TABLE = f'''
 CREATE TABLE IF NOT EXISTS `{DB}`.`products` (
   `product_id` VARCHAR(45) NOT NULL,
@@ -65,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `{DB}`.`products` (
 );
 '''
 
+# Query to create customer_leaderboard table
 CREATE_CUSTOMER_LEADERBOARD_TABLE = f'''
 CREATE TABLE IF NOT EXISTS `{DB}`.`customer_leaderboard` (
   `customer_id` VARCHAR(15) NOT NULL,
@@ -78,6 +82,7 @@ CREATE TABLE IF NOT EXISTS `{DB}`.`customer_leaderboard` (
 );
 '''
 
+# Creating tables 
 print('create users table')
 db.create_table(connection, CREATE_USERS_TABLE)
 print('table users created successfully')
@@ -93,6 +98,8 @@ print('table orders created successfully')
 print('create leaderboard table')
 db.create_table(connection, CREATE_CUSTOMER_LEADERBOARD_TABLE)
 print('table leaderboard created successfully')
+
+# End of creating tables
 
 with open(RELATIVE_CONFIG_PATH + USER + '.csv', 'r') as f:
     val = []
